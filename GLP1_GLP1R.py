@@ -14,7 +14,7 @@ S_dose = 1.0   # typical semaglutide level [nM]
 
 S = np.logspace(-3, 3, 500)   # semaglutide concentration with 0.001 to 1,000 [nM]
 
-plt.figure()
+plt.figure(figsize=(7, 6))
 plt.semilogx(S, Fact(G_fast, S, Kd1, Kd2), lw=2, label="GLP1 (fasting) ~ 0.0150 nM")
 plt.semilogx(S, Fact(G_fed,  S, Kd1, Kd2), lw=2, ls="--", label="GLP1 (after meal) ~ 0.040 nM")
 plt.axvline(S_dose, ls=":", c="gray", lw=1, label="Semaglutide ~1 nM")
@@ -22,7 +22,13 @@ plt.ylim(0, 1)
 plt.xlabel("[Semaglutide] (nM, log scale)")
 plt.ylabel("Fraction Active GLP1R (Fact)")
 plt.title("GLP1 and Semaglutide Co-stimulation of GLP1R")
-plt.legend()
+plt.legend(loc="upper left")
+
+# Interpretation of the results
+interpretation = ("The fraction of active GLP1R (Fact) is higher after a meal than when fasting, unless semaglutide is present: with semaglutide ~1 nM, Fact is nearly equal for the two conditions, showing how co-stimulation makes Fact similar after a meal and when fasting.")
+plt.subplots_adjust(bottom=0.3)
+plt.figtext(0.5, 0.02, interpretation, wrap=True, ha="center", fontsize=9)
+
 plt.show()
 
 # Response with no semaglutide vs. at ~1 nM semaglutide
