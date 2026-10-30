@@ -25,7 +25,7 @@ plt.title("GLP1 and Semaglutide Co-stimulation of GLP1R")
 plt.legend(loc="upper left")
 
 # Interpretation of the results
-interpretation = ("The fraction of active GLP1R (Fact) is higher after a meal than when fasting, unless semaglutide is present: with semaglutide ~1 nM, Fact is nearly equal for the two conditions, showing how co-stimulation makes Fact similar after a meal and when fasting.")
+interpretation = ("The fraction of active GLP1R (Fact) is higher after a meal than when fasting (~19% vs. ~8%), unless semaglutide is present: with semaglutide ~1 nM, Fact is nearly equal for the two conditions (~74% vs. ~73%), showing how co-stimulation makes Fact similar after a meal and when fasting.")
 plt.subplots_adjust(bottom=0.3)
 plt.figtext(0.5, 0.02, interpretation, wrap=True, ha="center", fontsize=9)
 
