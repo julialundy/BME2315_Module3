@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def Fact(G, S, Kd1, Kd2):
+    """Fraction of Active GLP1R with GLP1 (G) and Semaglutide (S) Co-Stimulating:
+       Fact = (Kd2*G + Kd1*S) / (Kd1*Kd2 + Kd2*G + Kd1*S)"""
+    return (Kd2*G + Kd1*S) / (Kd1*Kd2 + Kd2*G + Kd1*S)
+
+Kd1 = 0.17     # GLP1 dissociation constant [nM]
+Kd2 = 0.38     # semaglutide dissociation constant [nM]
+G_fast = 0.015 # fasting GLP1 [nM]
+G_fed  = 0.040 # after-meal GLP1 [nM]
+S_dose = 1.0   # typical semaglutide level [nM]
+
+S = np.logspace(-3, 3, 500)   # semaglutide concentration with 0.001 to 1,000 [nM]
+
+plt.figure()
+plt.semilogx(S, Fact(G_fast, S, Kd1, Kd2), lw=2, label="GLP1 (fasting) ~ 0.0150 nM")
+plt.semilogx(S, Fact(G_fed,  S, Kd1, Kd2), lw=2, ls="--", label="GLP1 (after meal) ~ 0.040 nM")
+plt.axvline(S_dose, ls=":", c="gray", lw=1, label="Semaglutide ~1 nM")
+plt.ylim(0, 1)
+plt.xlabel("[Semaglutide] (nM, log scale)")
+plt.ylabel("Fraction Active GLP1R (Fact)")
+plt.title("GLP1 and Semaglutide Co-stimulation of GLP1R")
+plt.legend()
+plt.show()
+
+# Response with no semaglutide vs. at ~1 nM semaglutide
+print("No semaglutide: GLP1 (fasting):", Fact(G_fast, 0, Kd1, Kd2)) 
+print("No semaglutide: GLP1 (after meal):", Fact(G_fed, 0, Kd1, Kd2))
+print("1 nM semaglutide: GLP1 (fasting):", Fact(G_fast, S_dose, Kd1, Kd2))
+print("1 nM semaglutide: GLP1 (after meal):", Fact(G_fed, S_dose, Kd1, Kd2))
