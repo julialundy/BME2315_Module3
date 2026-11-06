@@ -1,5 +1,6 @@
 # fit_semaglutide_GLP1R.py
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
@@ -14,8 +15,9 @@ Kd2 = 0.38 # default 0.38 L2, semaglutide (to fit)
 L1 = 0.015 # [nM] GLP1 (fasting)
 L2 = np.logspace(-3, 2, 500) # [nM] semaglutide or cavalitide
 
-# Load the data
-data = np.loadtxt("/Users/julialundy/Downloads/Computational/Module 1/BME2315_Module3/semaglutide_data.csv", delimiter=",", skiprows=1)
+# Load the data (looks in the same folder as this script)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data = np.loadtxt(os.path.join(script_dir, "semaglutide_data.csv"), delimiter=",", skiprows=1)
 L2_loaded, Fact_loaded = data[:, 0], data[:, 1]
 
 # Approach 1: Brute force optimization of Kd2: try many candidate values in a for loop
