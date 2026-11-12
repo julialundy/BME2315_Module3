@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # ===== choose product: 'Ozempic' or 'Wegovy' =====
 drug = 'Ozempic'
-#drug = 'Wegovy'
+# drug = 'Wegovy'
 
 # product-specific parameters
 products = {
